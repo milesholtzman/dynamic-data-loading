@@ -5,6 +5,8 @@ console.log(data);
 
 var table = d3.select('tbody');
 
+var button = d3.select('filter-btn')
+
 function buildTable(data) {
 	table.html('')
 	data.forEach((tableRow) => {
@@ -18,14 +20,14 @@ function buildTable(data) {
 };
 
 function handleClick(){
-	d3.eventpreventDefault();
-	var date = d3.select('#datatime').property('value');
-	var filterData = tableData
-	if (date) {
-		filterData = filterData.filter((row) => row.datetime === date);
-	}
-	buildTable(filterData);
+	d3.event.preventDefault();
+	var input = d3.select("#datetime").property("value");
+    if (input) {
+    filterData = tableData.filter((row) => row.date === input);
+    }
+    BuildTable(filterData);
+    console.log(input);
 };
 
-d3.selectAll('#filter-btn').on('click', handleClick);
+button.on('click', handleClick);
 buildTable(tableData);
